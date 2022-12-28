@@ -1,62 +1,62 @@
 ---
 toc: 4 - Writing the Story
 tutorial: true
-summary: How to send texts.
+summary: How to send telegrams.
 ---
-# Texts
+# telegrams
 
-The text plugin lets you send text messages to other characters.
+The telegram plugin lets you send telegram messages to other characters.
 
-It is generally considered fine to start a text scene with someone without permission - as long as you recognize that they may not see or respond to texts in a timely fashion. Please don't take the length of time between texts to be IC; sometimes OOC factors delay someone's ability to respond.
+It is generally considered fine to start a telegram scene with someone without permission - as long as you recognize that they may not see or respond to telegrams in a timely fashion. Please don't take the length of time between telegrams to be IC; sometimes OOC factors delay someone's ability to respond.
 
 [[toc]]
 
-##Sending Texts without a Scene
+##Sending telegrams without a Scene
 
-On the game, you can text characters online by sending a text without specifying a scene number. These texts are not added to any scene and will not be logged or saved unless you do so manually.
+On the game, you can telegram characters online by sending a telegram without specifying a scene number. These telegrams are not added to any scene and will not be logged or saved unless you do so manually.
 
-Do `txt <name>=<message>` to send a text without adding it to a scene.
+Do `telegram <name>=<message>` to send a telegram without adding it to a scene.
 
-> **Note:** Texting characters without an attached scene only works when all characters are logged in to the game via telnet; it will not work via the portal. Texting via the portal requires a scene.
+> **Note:** telegramming characters without an attached scene only works when all characters are logged in to the game via telnet; it will not work via the portal. telegramming via the portal requires a scene.
 
-##Sending Texts in a Scene
+##Sending telegrams in a Scene
 
 ###Starting a Scene
 
-On game, you can start a new text scene in one easy step.
+On game, you can start a new telegram scene in one easy step.
 
-`txt/newscene <name> [<name}]=<message>`
+`telegram/newscene <name> [<name}]=<message>`
 
-This will start a new scene, set the location and scene type, emit the text to all characters currently online, and add the text to the scene.
+This will start a new scene, set the location and scene type, emit the telegram to all characters currently online, and add the telegram to the scene.
 
-On the portal, you will need to [start a scene](/help/scenes_tutorial#starting-a-scene) and set the location (Text) and type (Text) manually.
+On the portal, you will need to [start a scene](/help/scenes_tutorial#starting-a-scene) and set the location (Telegram) and type (Telegram) manually.
 
-###Replying to Texts
+###Replying to telegrams
 
 ####On Game
-If someone sends you a text, you can quickly reply to the text using `txt/reply=<message>`. This will send your text to everyone in the recipient list and add it to the scene. To see who last texted you, type `txt/reply`
+If someone sends you a telegram, you can quickly reply to the telegram using `telegram/reply=<message>`. This will send your telegram to everyone in the recipient list and add it to the scene. To see who last telegrammed you, type `telegram/reply`
 
-On the game, the 'txt' command will remember the last character and scene you texted. If you continue to text the same person, you can simply do `txt <message>`.
+On the game, the 'telegram' command will remember the last character and scene you telegrammed. If you continue to telegram the same person, you can simply do `telegram <message>`.
 
-If you're texting several different recipients or to several different scenes at once, you'll need to specify who you are texting and what scene it should be added to by doing `txt <name> [<name}]/<scene>=<message>`.
+If you're telegramming several different recipients or to several different scenes at once, you'll need to specify who you are telegramming and what scene it should be added to by doing `telegram <name> [<name}]/<scene>=<message>`.
 
-If you text someone who was not previously in that scene, they will automatically be added to the scene.
+If you telegram someone who was not previously in that scene, they will automatically be added to the scene.
 
 ####On the Portal
-Texts sent from the portal add the texts to the scene and emit to anyone who is online on the game.
+telegrams sent from the portal add the telegrams to the scene and emit to anyone who is online on the game.
 
-Send texts by using the 'Txt' button next to the 'Add OOC' and 'Add Pose' buttons on the portal. By default, this button texts everyone in the scene.
+Send telegrams by using the 'Telegram' button next to the 'Add OOC' and 'Add Pose' buttons on the portal. By default, this button telegrams everyone in the scene.
 
-To send texts to a different recipient list, do `<name> [name]=<message>` and use the 'Txt' button.
+To send telegrams to a different recipient list, do `<name> [name]=<message>` and use the 'Telegram' button.
 
-##Text Settings
+##Telegram Settings
 
-###Text Color
+###Telegram Color
 
-You can choose a personal text color to make text scenes more readable. Do `txt/color <color>` to set your personal color.  You can view available colors by doing `colors`, `colors1`, `colors2`, etc.
+You can choose a personal telegram color to make telegram scenes more readable. Do `telegram/color <color>` to set your personal color.  You can view available colors by doing `colors`, `colors1`, `colors2`, etc.
 
 Use the full ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%x46 for bright green highlight, etc.
 
-###Ignoring or Blocking Texts
+###Ignoring or Blocking telegrams
 
-If you do not wish to receive txts (in general, or from a specific person), the `page/ignore <name>=<on/off>` and `page/dnd <on/off>` commands will block txts as well.
+If you do not wish to receive telegrams (in general, or from a specific person), the `page/ignore <name>=<on/off>` and `page/dnd <on/off>` commands will block telegrams as well.
