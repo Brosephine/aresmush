@@ -28,6 +28,6 @@ There is a "Telegram" button on any active scene in the web-portal. Telegramming
 `telegram/reply` - See who last telegrammed you.
 `telegram/reply <message>` - Reply to the last telegram (including all recipients + scene, if there is one)
 
-`telegram/color <color>` - Color the (TXT to <name>) prefix. Use ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%xg for green highlight.
+`telegram/color <color>` - Color the (Telegram to <name>) prefix. Use ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%xg for green highlight.
 
 >  **Note:** If you do not wish to receive telegrams (in general, or from a specific person), the `page/ignore <name>=<on/off>` and `page/dnd <on/off>` commands will block telegrams as well.
