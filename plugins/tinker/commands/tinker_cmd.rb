@@ -9,9 +9,13 @@ module AresMUSH
       end
       
       def handle
-        client.emit_success "Done!"
+         FS3ActionSkill.all.each do |a|
+           if (a.name == 'Piloting')
+             client.emit "Deleting Piloting from #{a.character.name} -- was at rating #{a.rating}."
+               a.delete
+             end
+         end
       end
-
     end
   end
 end
