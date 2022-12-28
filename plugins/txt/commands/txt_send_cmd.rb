@@ -1,10 +1,10 @@
 module AresMUSH
-  module Telegram
-      class TelegramSendCmd
+  module Txt
+      class TxtSendCmd
           include CommandHandler
-# Possible commands... telegram name=message; telegram =message; telegram name[/optional scene #]=<message>
+# Possible commands... txt name=message; txt =message; txt name[/optional scene #]=<message>
 
-          attr_accessor :names, :message, :scene_id, :scene, :telegram, :telegram_recipient, :use_only_nick
+          attr_accessor :names, :message, :scene_id, :scene, :txt, :txt_recipient, :use_only_nick
 
         def parse_args
           # if (!cmd.args)
@@ -13,8 +13,8 @@ module AresMUSH
           #  IF YOU PUT THIS BACK IN, CHANGE NEXT LINE TO ELSIF
 
           if (cmd.args.start_with?("="))
-            self.names = enactor.telegram_last
-            self.scene_id = enactor.telegram_scene
+            self.names = enactor.txt_last
+            self.scene_id = enactor.txt_scene
             self.message = cmd.args.after("=")
 
           elsif (cmd.args.include?("="))
@@ -22,7 +22,7 @@ module AresMUSH
             # Catch the common mistake of last-paging someone a link.
             # p http://stuff.com/stuff=this.file
             if (args.arg1 && (args.arg1.include?("http://") || args.arg1.include?("https://")) )
-              self.names = enactor.telegram_last
+              self.names = enactor.txt_last
               self.message = "#{args.arg1}=#{args.arg2}"
             #Text a specific scene
             elsif ( args.arg1.include?("/") )
@@ -44,15 +44,15 @@ module AresMUSH
 
           else
             #Text your last recipient and scene
-            self.names = enactor.telegram_last || []
-            self.scene_id = enactor.telegram_scene
+            self.names = enactor.txt_last || []
+            self.scene_id = enactor.txt_scene
             self.message = cmd.args
           end
         end
 
         def check_errors
           return t('dispatcher.not_allowed') if !enactor.is_approved?
-          return t('telegram.telegram_target_missing') if !self.names || self.names.empty?
+          return t('txt.txt_target_missing') if !self.names || self.names.empty?
           return nil
         end
 
@@ -61,16 +61,16 @@ module AresMUSH
           if self.scene_id
             scene = Scene[self.scene_id]
             if !scene
-              client.emit_failure t('telegram.scene_not_found')
+              client.emit_failure t('txt.scene_not_found')
             end
-            can_telegram_scene = Scenes.can_read_scene?(enactor, scene)
+            can_txt_scene = Scenes.can_read_scene?(enactor, scene)
             if scene.completed
-              client.emit_failure t('telegram.scene_not_running')
+              client.emit_failure t('txt.scene_not_running')
               return
             elsif !scene.room
               raise "Trying to pose to a scene that doesn't have a room."
-            elsif !can_telegram_scene
-              client.emit_failure t('telegram.scene_no_access')
+            elsif !can_txt_scene
+              client.emit_failure t('txt.scene_no_access')
               return
             end
             self.scene = scene
@@ -81,10 +81,10 @@ module AresMUSH
           self.names.each do |name|
             char = Character.named(name)
             if !char
-              client.emit_failure t('telegram.no_such_character')
+              client.emit_failure t('txt.no_such_character')
               return
             elsif (!Login.is_online?(char) && !self.scene)
-              client.emit_failure t('telegram.target_offline_no_scene', :name => name.titlecase )
+              client.emit_failure t('txt.target_offline_no_scene', :name => name.titlecase )
               return
             else
               recipients.concat [char]
@@ -92,15 +92,15 @@ module AresMUSH
 
             #Add recipient to scene if they are not already a participant
             if self.scene
-              can_telegram_scene = Scenes.can_read_scene?(char, self.scene)
-              if (!can_telegram_scene)
-                Scenes.add_to_scene(scene, t('telegram.recipient_added_to_scene', :name => char.name ),
+              can_txt_scene = Scenes.can_read_scene?(char, self.scene)
+              if (!can_txt_scene)
+                Scenes.add_to_scene(scene, t('txt.recipient_added_to_scene', :name => char.name ),
                 enactor, nil, true )
-                Rooms.emit_ooc_to_room self.scene.room, t('telegram.recipient_added_to_scene',
+                Rooms.emit_ooc_to_room self.scene.room, t('txt.recipient_added_to_scene',
                 :name => char.name )
 
                 if (enactor.room != self.scene.room)
-                  client.emit_success t('telegram.recipient_added_to_scene',
+                  client.emit_success t('txt.recipient_added_to_scene',
                   :name =>char.name )
                 end
 
@@ -112,11 +112,11 @@ module AresMUSH
             end
           end
 
-          recipient_display_names = Telegram.format_recipient_display_names(recipients, enactor)
-          recipient_names = Telegram.format_recipient_names(recipients)
-          sender_display_name = Telegram.format_sender_display_name(enactor)
+          recipient_display_names = Txt.format_recipient_display_names(recipients, enactor)
+          recipient_names = Txt.format_recipient_names(recipients)
+          sender_display_name = Txt.format_sender_display_name(enactor)
 
-          self.use_only_nick = Global.read_config("telegram", "use_only_nick")
+          self.use_only_nick = Global.read_config("txt", "use_only_nick")
           # If scene, add text to scene
           if self.scene
             if self.use_only_nick
@@ -125,17 +125,17 @@ module AresMUSH
               scene_id_display = self.scene_id
             end
 
-            scene_telegram = t('telegram.telegram_no_scene_id', :telegram => Telegram.format_telegram_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message)
+            scene_txt = t('txt.txt_no_scene_id', :txt => Txt.format_txt_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message)
 
-            self.telegram = t('telegram.telegram_with_scene_id', :telegram => Telegram.format_telegram_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message, :scene_id => scene_id_display )
+            self.txt = t('txt.txt_with_scene_id', :txt => Txt.format_txt_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message, :scene_id => scene_id_display )
 
-            Scenes.add_to_scene(self.scene, scene_telegram, enactor)
-            Rooms.emit_ooc_to_room self.scene.room, scene_telegram
+            Scenes.add_to_scene(self.scene, scene_txt, enactor)
+            Rooms.emit_ooc_to_room self.scene.room, scene_txt
           else
             if self.use_only_nick
-              self.telegram = t('telegram.telegram_no_scene_id_nick', :telegram => Telegram.format_telegram_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message, :sender_char => enactor.name )
+              self.txt = t('txt.txt_no_scene_id_nick', :txt => Txt.format_txt_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message, :sender_char => enactor.name )
             else
-              self.telegram = t('telegram.telegram_no_scene_id', :telegram => Telegram.format_telegram_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message)
+              self.txt = t('txt.txt_no_scene_id', :txt => Txt.format_txt_indicator(enactor, recipient_display_names), :sender => sender_display_name, :message => message)
             end
 
           end
@@ -145,28 +145,28 @@ module AresMUSH
           recipients.each do |char|
             if (Login.is_online?(char)) && (!self.scene || char.room != self.scene.room)
               if char.page_ignored.include?(enactor)
-                client.emit_failure t('telegram.cant_telegram_ignored', :names => char.name)
+                client.emit_failure t('txt.cant_txt_ignored', :names => char.name)
                 return
               elsif (char.page_do_not_disturb)
                 client.emit_ooc t('page.recipient_do_not_disturb', :name => char.name)
                 return
               end
-              Telegram.telegram_recipient(enactor, char, recipient_display_names, self.telegram, self.scene_id)
+              Txt.txt_recipient(enactor, char, recipient_display_names, self.txt, self.scene_id)
             end
-            telegram_received = "#{recipient_names}" + " #{enactor.name}"
-            telegram_received.slice! "#{char.name}"
-            char.update(telegram_received: (telegram_received.squish))
-            char.update(telegram_received_scene: self.scene_id)
+            txt_received = "#{recipient_names}" + " #{enactor.name}"
+            txt_received.slice! "#{char.name}"
+            char.update(txt_received: (txt_received.squish))
+            char.update(txt_received_scene: self.scene_id)
           end
 
           #To sender
           if (!self.scene || enactor_room != self.scene.room)
-            client.emit self.telegram
+            client.emit self.txt
           end
 
 
-          enactor.update(telegram_last: list_arg(recipient_names))
-          enactor.update(telegram_scene: self.scene_id)
+          enactor.update(txt_last: list_arg(recipient_names))
+          enactor.update(txt_scene: self.scene_id)
           Scenes.handle_word_count_achievements(enactor, message)
       end
 

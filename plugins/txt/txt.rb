@@ -1,27 +1,27 @@
 $:.unshift File.dirname(__FILE__)
 
 module AresMUSH
-  module Telegram
+  module Txt
     def self.plugin_dir
       File.dirname(__FILE__)
     end
  
     def self.shortcuts
-      Global.read_config("telegram", "shortcuts")
+      Global.read_config("txt", "shortcuts")
     end
  
     def self.get_cmd_handler(client, cmd, enactor)
         case cmd.root
-        when "telegram"
+        when "txt"
           case cmd.switch
           when "color"
-            return TelegramColorCmd
+            return TxtColorCmd
           when "newscene"
-            return TelegramNewSceneCmd
+            return TxtNewSceneCmd
           when "reply"
-            return TelegramReplyCmd
+            return TxtReplyCmd
           when nil
-            return TelegramSendCmd
+            return TxtSendCmd
           end
         end
       return nil
@@ -29,8 +29,8 @@ module AresMUSH
 
     def self.get_web_request_handler(request)
       case request.cmd
-      when "addTelegram"
-        return AddTelegramRequestHandler
+      when "addTxt"
+        return AddTxtRequestHandler
       end
       nil
     end

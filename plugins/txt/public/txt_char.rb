@@ -1,10 +1,10 @@
 module AresMUSH
     class Character
-        attribute :telegram_last, :type => DataType::Array, :default => []
-        attribute :telegram_last_scene, :type => DataType::Array, :default => []
-        attribute :telegram_received
-        attribute :telegram_received_scene
-        attribute :telegram_color
-        attribute :telegram_scene
+        attribute :txt_last, :type => DataType::Array, :default => []
+        attribute :txt_last_scene, :type => DataType::Array, :default => []
+        attribute :txt_received
+        attribute :txt_received_scene
+        attribute :txt_color
+        attribute :txt_scene
     end
   end
