@@ -28,6 +28,10 @@ There is a "Txt" button on any active scene in the web-portal. Texting into a sc
 `txt/reply` - See who last texted you.
 `txt/reply <message>` - Reply to the last text (including all recipients + scene, if there is one)
 
+<<<<<<< HEAD
 `txt/color <color>` - Color the (TXT to <name>) prefix. Use ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%xg for green highlight.
+=======
+`telegram/color <color>` - Color the (Telegram to <name>) prefix. Use ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%xg for green highlight.
+>>>>>>> 47eaa7455336713d3fe102e09f2d8324a6d0d5aa
 
 >  **Note:** If you do not wish to receive txts (in general, or from a specific person), the `page/ignore <name>=<on/off>` and `page/dnd <on/off>` commands will block txts as well.
