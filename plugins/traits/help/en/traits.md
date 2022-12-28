@@ -17,7 +17,7 @@ We want you to have ownership over your magic, and as such we are allowing you t
 
 `spells <name>` - Lists spells for a character.
 `spell/set <title - type>=<description>` - Sets a spell.
-`spell/remove <title - type>` - Removes a trait.
+`spell/remove <title - type>` - Removes a spell.
 
 Admins with the `manage\_apps` permission can set other peoples' spells:
 
