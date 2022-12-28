@@ -3,7 +3,7 @@ toc: 4 - Writing the Story
 summary: How to send telegrams.
 aliases:
 - telegram
-- Telegraming
+- Telegramming
 - telegrams
 ---
 #Telegrams
@@ -16,7 +16,7 @@ There is a "Telegram" button on any active scene in the web-portal. Telegraming 
 
 `<name>=<message>` - Send a message to a specific person from the webportal. Adds recipients to scene if not already a participant.
 
->  **Note:** Someone who's not logged in may not know they've been telegramed unless they notice their notifications!
+>  **Note:** Someone who's not logged in may not know they've been telegrammed unless they notice their notifications!
 
 ## Commands
 `telegram/newscene <name> [<name> <name>]=<message>` - Starts a new scene + sends a message to those names + the scene.
