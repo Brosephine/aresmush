@@ -11,8 +11,8 @@ Send telegram messages to other characters.
 
 > Learn how the telegram system works in the [Telegram Tutorial](/help/telegram_tutorial).
 
-## Telegraming from the Web-Portal
-There is a "Telegram" button on any active scene in the web-portal. Telegraming into a scene will send a message in-game, if the character is connected. By default, telegraming on the portal will send a telegram to all participants of the scene.
+## Telegramming from the Web-Portal
+There is a "Telegram" button on any active scene in the web-portal. Telegramming into a scene will send a message in-game, if the character is connected. By default, telegramming on the portal will send a telegram to all participants of the scene.
 
 `<name>=<message>` - Send a message to a specific person from the webportal. Adds recipients to scene if not already a participant.
 
@@ -25,7 +25,7 @@ There is a "Telegram" button on any active scene in the web-portal. Telegraming 
 `telegram <name> [<name> <name>]/<scene #>=<message>` - Send a telegram to name + add it to a scene. Adds recipients to scene if not already a participant.
 `telegram [=]<message>` - Send a message to your last telegram target + last scene.
 
-`telegram/reply` - See who last telegramed you.
+`telegram/reply` - See who last telegrammed you.
 `telegram/reply <message>` - Reply to the last telegram (including all recipients + scene, if there is one)
 
 `telegram/color <color>` - Color the (TXT to <name>) prefix. Use ansi color format for this, ex: \%xh\%xr for red highlight, \%xh\%xg for green highlight.
