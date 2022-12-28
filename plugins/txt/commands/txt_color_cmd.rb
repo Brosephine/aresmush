@@ -1,6 +1,6 @@
 module AresMUSH
-  module Txt
-    class TxtColorCmd
+  module Telegram
+    class TelegramColorCmd
       include CommandHandler
       
       attr_accessor :option
@@ -10,8 +10,8 @@ module AresMUSH
       end
 
       def handle
-        enactor.update(txt_color: self.option)
-        client.emit_success t('txt.color_set', :option => self.option)
+        enactor.update(telegram_color: self.option)
+        client.emit_success t('telegram.color_set', :option => self.option)
       end
     end
   end
