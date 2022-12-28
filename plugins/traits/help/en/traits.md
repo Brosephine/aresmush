@@ -5,7 +5,7 @@ summary: Setting spells.
 
 # Spells
 
-You can set up to three spells on your character.
+You can set up to three spells on your character at chargen (one spell per two dots in your elemental magic affinity). After chargen, you make request additional spells per additional point of elemental magic affinity. 
 
 We want you to have ownership over your magic, and as such we are allowing you to write your own spells to add personal RP flare. The spells can be any combination of the following:
 
