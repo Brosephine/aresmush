@@ -3,7 +3,7 @@ toc: 4 - Writing the Story
 summary: How to send telegrams.
 aliases:
 - telegram
-- Telegramming
+- telegramming
 - telegrams
 ---
 #Telegrams
