@@ -1,6 +1,9 @@
 ---
 toc: Character Creation
 summary: Setting spells.
+aliases:
+- spell
+- spells
 ---
 
 # Spells
