@@ -1,6 +1,8 @@
 module AresMUSH
   module Chargen
     def self.custom_approval(char)
+      Custom.set_tags_and_chan(char)
+    end
             
       # If you don't want to have any custom approval steps, just leave this blank.
       
@@ -15,6 +17,5 @@ module AresMUSH
       #  end
       #
       # See https://www.aresmush.com/tutorials/config/chargen.html for details.
-    end
   end
 end
